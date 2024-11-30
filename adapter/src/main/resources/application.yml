@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: adapter
+server:
+  port: 8081

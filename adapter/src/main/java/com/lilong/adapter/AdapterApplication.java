@@ -1,16 +1,13 @@
-package com.lilong.workflow;
+package com.lilong.adapter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * @author lilong
- */
 @SpringBootApplication
-public class WorkflowCoreApplication {
+public class AdapterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WorkflowCoreApplication.class, args);
+        SpringApplication.run(AdapterApplication.class, args);
     }
 
 }
