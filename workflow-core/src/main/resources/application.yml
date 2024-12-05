@@ -3,3 +3,8 @@ server:
 spring:
   application:
     name: workflow
+
+# mybatis 打印日志
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

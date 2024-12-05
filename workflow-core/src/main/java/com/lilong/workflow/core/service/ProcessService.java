@@ -1,6 +1,5 @@
 package com.lilong.workflow.core.service;
 
-import org.activiti.engine.repository.Deployment;
 
 /**
  * @author : lilong
@@ -14,12 +13,4 @@ public interface ProcessService {
      * @param processKey
      */
     String start(String processKey);
-
-    /**
-     * 单个流程定义发布
-     * @param xmlPath 流程路径地址
-     * @param processName 流程名字
-     * @return
-     */
-    Deployment deploy(String xmlPath,String processName);
 }

@@ -20,8 +20,6 @@ import java.io.InputStream;
 @Slf4j
 @Service("abstractProcessService")
 public abstract class AbstractProcessService implements ProcessService {
-    @Autowired
-    private RepositoryService repositoryService;
     /**
      * 开启流程
      *
@@ -35,16 +33,17 @@ public abstract class AbstractProcessService implements ProcessService {
      *
      * @return
      */
-    @Override
-    public Deployment deploy(String xmlPath,String processName) {
-        File file = new File(xmlPath);
-        try {
-            return repositoryService.createDeployment()
-                    .addInputStream(processName,new FileInputStream(file))
-                    .deploy();
-        } catch (FileNotFoundException e) {
-            log.error("file not found exception :{}",e);
-        }
-        return null;
-    }
+//    @Override
+//    public Deployment deploy(String xmlPath,String processName) {
+//        File file = new File(xmlPath);
+//        try {
+//            return repositoryService.createDeployment()
+//                    .addInputStream(processName,new FileInputStream(file))
+//                    .name(processName)
+//                    .deploy();
+//        } catch (FileNotFoundException e) {
+//            log.error("file not found exception :{}",e);
+//        }
+//        return null;
+//    }
 }

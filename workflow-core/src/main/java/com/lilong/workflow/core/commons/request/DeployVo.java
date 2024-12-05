@@ -8,7 +8,7 @@ import lombok.Data;
  * @description : 单个流程部署VO
  */
 @Data
-public class SingleDeployVo {
+public class DeployVo {
     /**
      * 文件路径
      */
@@ -17,4 +17,8 @@ public class SingleDeployVo {
      * 文件名称
      */
     private String xmlName;
+    /**
+     * 部署类型
+     */
+    private String deployType;
 }
