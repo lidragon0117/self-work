@@ -16,4 +16,7 @@
         <module>workflow-core</module>
         <module>adapter</module>
     </modules>
+    <dependencies>
+
+    </dependencies>
 </project>

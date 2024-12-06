@@ -24,6 +24,6 @@ public class DeployController {
     @PostMapping("/deployByType")
     public void deployByType(@RequestBody DeployVo deployVo){
         DeploymentService deploy = DeployStrategyFactory.getDeploy(deployVo.getDeployType());
-        deploy.deploy(deployVo);
+        deploy.deployByType(deployVo);
     }
 }

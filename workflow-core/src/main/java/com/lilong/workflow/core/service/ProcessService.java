@@ -1,6 +1,8 @@
 package com.lilong.workflow.core.service;
 
 
+import com.lilong.workflow.core.commons.request.ProcessStartRequest;
+
 /**
  * @author : lilong
  * @date : 2024-12-02 22:00
@@ -10,7 +12,7 @@ public interface ProcessService {
     /**
      * 开启流程
       * @return
-     * @param processKey
+     * @param startRequest
      */
-    String start(String processKey);
+    String start(ProcessStartRequest startRequest);
 }

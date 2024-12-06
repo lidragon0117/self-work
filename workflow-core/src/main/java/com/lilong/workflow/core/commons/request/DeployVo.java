@@ -12,11 +12,11 @@ public class DeployVo {
     /**
      * 文件路径
      */
-    private String xmlPath;
+    private String resourcePath;
     /**
      * 文件名称
      */
-    private String xmlName;
+    private String resourceName;
     /**
      * 部署类型
      */

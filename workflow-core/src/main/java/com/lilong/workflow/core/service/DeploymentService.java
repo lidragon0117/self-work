@@ -10,9 +10,9 @@ import org.activiti.engine.repository.Deployment;
  */
 public interface DeploymentService {
     /**
-     * 资源部署
+     * 根据类型进行资源部署
      * @param deployVo
      * @return
      */
-    Deployment deploy(DeployVo deployVo);
+    Deployment deployByType(DeployVo deployVo);
 }

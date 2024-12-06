@@ -1,5 +1,6 @@
 package com.lilong.workflow.core.service.base;
 
+import com.lilong.workflow.core.commons.request.ProcessStartRequest;
 import com.lilong.workflow.core.service.ProcessService;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
@@ -23,27 +24,9 @@ public abstract class AbstractProcessService implements ProcessService {
     /**
      * 开启流程
      *
-     * @param processKey 模版Id
+     * @param processStart
      * @return
      */
     @Override
-    public abstract String start(String processKey);
-    /**
-     * 单个流程部署
-     *
-     * @return
-     */
-//    @Override
-//    public Deployment deploy(String xmlPath,String processName) {
-//        File file = new File(xmlPath);
-//        try {
-//            return repositoryService.createDeployment()
-//                    .addInputStream(processName,new FileInputStream(file))
-//                    .name(processName)
-//                    .deploy();
-//        } catch (FileNotFoundException e) {
-//            log.error("file not found exception :{}",e);
-//        }
-//        return null;
-//    }
+    public abstract String start(ProcessStartRequest processStart);
 }
