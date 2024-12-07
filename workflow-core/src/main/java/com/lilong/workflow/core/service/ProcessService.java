@@ -1,6 +1,7 @@
 package com.lilong.workflow.core.service;
 
 
+import com.lilong.workflow.core.commons.request.CompleteTaskRequest;
 import com.lilong.workflow.core.commons.request.ProcessStartRequest;
 
 /**
@@ -15,4 +16,11 @@ public interface ProcessService {
      * @param startRequest
      */
     String start(ProcessStartRequest startRequest);
+
+    /**
+     * 处理当前任务
+     * @param completeTask
+     * @return
+     */
+    Boolean completeTask(CompleteTaskRequest completeTask);
 }

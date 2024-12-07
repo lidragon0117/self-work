@@ -1,6 +1,7 @@
 package com.lilong.workflow.core.controller;
 
 
+import com.lilong.workflow.core.commons.request.CompleteTaskRequest;
 import com.lilong.workflow.core.commons.request.ProcessStartRequest;
 import com.lilong.workflow.core.commons.response.base.BaseResponse;
 import com.lilong.workflow.core.service.ProcessService;
@@ -30,6 +31,16 @@ public class ProcessController {
     @PostMapping("/start")
     public BaseResponse processStart(@RequestBody ProcessStartRequest processStartRequest) {
         return BaseResponse.success(processService.start(processStartRequest));
+    }
+
+    /**
+     * 审批当前任务 通过、驳回
+     * @param completeTaskRequest
+     * @return
+     */
+    @PostMapping("/complete")
+    public BaseResponse completeTask(@RequestBody CompleteTaskRequest completeTaskRequest) {
+        return BaseResponse.success(processService.completeTask(completeTaskRequest));
     }
 
 

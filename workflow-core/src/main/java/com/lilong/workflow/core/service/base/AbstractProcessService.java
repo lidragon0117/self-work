@@ -19,7 +19,6 @@ import java.io.InputStream;
  * @description : 流程管理抽象类
  */
 @Slf4j
-@Service("abstractProcessService")
 public abstract class AbstractProcessService implements ProcessService {
     /**
      * 开启流程

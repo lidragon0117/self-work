@@ -2,6 +2,7 @@ package com.lilong.workflow.core.service;
 
 import com.lilong.workflow.core.commons.request.DeployVo;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.ProcessDefinition;
 
 /**
  * @author : lilong
@@ -15,4 +16,11 @@ public interface DeploymentService {
      * @return
      */
     Deployment deployByType(DeployVo deployVo);
+
+    /**
+     * 获取流程定义信息
+     * @param processKey
+     * @return
+     */
+    ProcessDefinition getProcessDefinition(String processKey);
 }
