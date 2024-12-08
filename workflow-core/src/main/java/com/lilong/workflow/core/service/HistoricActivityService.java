@@ -1,6 +1,8 @@
 package com.lilong.workflow.core.service;
 
+import com.lilong.workflow.core.commons.request.HisProcessRequest;
 import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricVariableInstance;
 
 import java.util.List;
 
@@ -12,8 +14,15 @@ import java.util.List;
 public interface HistoricActivityService {
     /**
      * 根据流程id 获取历史流程信息
-     * @param processId
+     * @param hisProcessRequest
      * @return
      */
-    List<HistoricActivityInstance> getHisProcessByProcessId(String processId);
+    List<HistoricActivityInstance> getHisProcessByProcessId(HisProcessRequest hisProcessRequest);
+
+    /**
+     * 获取所有审批操作数据
+     * @param hisProcessRequest
+     * @return
+     */
+    List<HistoricVariableInstance> getHisVariables(HisProcessRequest hisProcessRequest);
 }

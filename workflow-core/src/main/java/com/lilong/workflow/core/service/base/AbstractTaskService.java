@@ -1,5 +1,6 @@
 package com.lilong.workflow.core.service.base;
 
+import com.lilong.workflow.core.commons.request.ProcessTaskRequest;
 import com.lilong.workflow.core.service.ProcessTaskService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,14 @@ public abstract class AbstractTaskService implements ProcessTaskService {
      */
     @Override
     public abstract Task getCurrentTask(String processId, String assignee);
+
+    /**
+     * 获取当前任务
+     * @param processTask
+     * @return
+     */
+    @Override
+    public abstract Task getCurrentTask(ProcessTaskRequest processTask);
 
     /**
      * 获取所有任务

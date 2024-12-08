@@ -1,8 +1,10 @@
 package com.lilong.workflow.core.controller;
 
 import com.lilong.workflow.core.commons.request.DeployVo;
+import com.lilong.workflow.core.commons.response.base.BaseResponse;
 import com.lilong.workflow.core.service.DeploymentService;
 import com.lilong.workflow.core.service.strategy.DeployStrategyFactory;
+import org.activiti.engine.repository.Deployment;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,9 @@ public class DeployController {
      * @param deployVo
      */
     @PostMapping("/deployByType")
-    public void deployByType(@RequestBody DeployVo deployVo){
+    public BaseResponse deployByType(@RequestBody DeployVo deployVo){
         DeploymentService deploy = DeployStrategyFactory.getDeploy(deployVo.getDeployType());
-        deploy.deployByType(deployVo);
+        Deployment deployment = deploy.deployByType(deployVo);
+        return BaseResponse.success(deployment);
     }
 }

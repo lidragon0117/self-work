@@ -41,6 +41,7 @@ public class ProcessServiceImpl extends AbstractProcessService {
         ProcessDefinition processDefinition = deploymentService.getProcessDefinition(startRequest.getProcessKey());
         if (processDefinition == null) {
             log.error("ProcessDefinition is not found");
+            throw new BaseException("ProcessDefinition is not found");
         }
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
                 startRequest.getProcessKey(),

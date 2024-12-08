@@ -18,7 +18,15 @@ public class DeployVo {
      */
     private String resourceName;
     /**
-     * 部署类型
+     * 部署类型 单个文件部署:singleDeploy  zip压缩包部署:zipDeploy
      */
     private String deployType;
+    /**
+     * 部署流程编码
+     */
+    private String deployKey;
+    /**
+     * 租户编码
+     */
+    private String tenantId;
 }

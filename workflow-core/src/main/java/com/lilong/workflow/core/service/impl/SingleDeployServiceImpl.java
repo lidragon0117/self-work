@@ -36,6 +36,8 @@ public class SingleDeployServiceImpl extends AbstractDeployService {
             InputStream inputStream=new FileInputStream(file);
            return repositoryService.createDeployment()
                     .name(deployVo.getResourceName())
+                    .key(deployVo.getDeployKey())
+                    .tenantId(deployVo.getTenantId())
                     .addInputStream(deployVo.getResourceName(),inputStream)
                     .deploy();
         } catch (FileNotFoundException e) {

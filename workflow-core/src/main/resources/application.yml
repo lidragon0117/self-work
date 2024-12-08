@@ -8,3 +8,8 @@ spring:
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#开启Activiti打印日志
+logging:
+  level:
+    org.activiti.engine.impl.persistence.entity: trace

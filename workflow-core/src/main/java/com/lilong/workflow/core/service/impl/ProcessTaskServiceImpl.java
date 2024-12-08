@@ -1,6 +1,7 @@
 package com.lilong.workflow.core.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
+
+import com.lilong.workflow.core.commons.request.ProcessTaskRequest;
 import com.lilong.workflow.core.commons.response.base.BaseException;
 import com.lilong.workflow.core.service.base.AbstractTaskService;
 import org.activiti.engine.TaskService;
@@ -35,12 +36,31 @@ public class ProcessTaskServiceImpl extends AbstractTaskService {
             throw new BaseException("processId cannot be empty!");
         }
         if (StringUtils.isEmpty(assignee)) {
-            return taskService.createTaskQuery().processInstanceId(processId).singleResult();
+            return taskService.createTaskQuery().includeProcessVariables().processInstanceId(processId).singleResult();
         }
         return taskService.createTaskQuery()
                 .processInstanceId(processId)
+                .includeProcessVariables()
                 .taskAssignee(assignee)
                 .singleResult();
+    }
+
+    /**
+     * 获取当前处待处理任务
+     *
+     * @param processTask
+     * @return
+     */
+    @Override
+    public Task getCurrentTask(ProcessTaskRequest processTask) {
+        if (StringUtils.isNotBlank(processTask.getProcessKey())) {
+            return taskService.createTaskQuery()
+                    .processDefinitionKey(processTask.getProcessKey())
+                    .includeProcessVariables()
+                    .taskAssignee(processTask.getCurrentUser())
+                    .singleResult();
+        }
+        return this.getCurrentTask(processTask.getProcessId(), processTask.getCurrentUser());
     }
 
     /**
@@ -61,6 +81,7 @@ public class ProcessTaskServiceImpl extends AbstractTaskService {
 
     /**
      * 任务审批
+     *
      * @param taskId
      * @param varLogs
      * @return

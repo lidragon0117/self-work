@@ -1,6 +1,7 @@
 package com.lilong.workflow.core.service.base;
 
 import com.lilong.workflow.core.commons.request.DeployVo;
+import com.lilong.workflow.core.commons.response.base.BaseException;
 import com.lilong.workflow.core.service.DeploymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
@@ -62,12 +63,11 @@ public abstract class AbstractDeployService implements DeploymentService {
     public ProcessDefinition getProcessDefinition(String processKey) {
         if(StringUtils.isEmpty(processKey)){
             log.info("processDefinition processKey is empty!");
-            return null;
+            throw new BaseException("processDefinition processKey is empty!");
         }
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
         return processDefinitionQuery
                 .processDefinitionKey(processKey)
-                .desc()
                 .latestVersion().singleResult();
     }
 }
