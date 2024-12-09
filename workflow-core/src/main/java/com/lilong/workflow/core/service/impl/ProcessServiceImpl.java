@@ -52,6 +52,16 @@ public class ProcessServiceImpl extends AbstractProcessService {
     }
 
     /**
+     * 获取当前流程实例
+     * @param processId
+     * @return
+     */
+    @Override
+    public ProcessInstance currentProcess(String processId) {
+        return super.currentProcess(processId);
+    }
+
+    /**
      * 处理当前任务
      * @param completeTask
      * @return

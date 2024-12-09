@@ -3,6 +3,7 @@ package com.lilong.workflow.core.service;
 
 import com.lilong.workflow.core.commons.request.CompleteTaskRequest;
 import com.lilong.workflow.core.commons.request.ProcessStartRequest;
+import org.activiti.engine.runtime.ProcessInstance;
 
 /**
  * @author : lilong
@@ -23,4 +24,11 @@ public interface ProcessService {
      * @return
      */
     Boolean completeTask(CompleteTaskRequest completeTask);
+
+    /**
+     * 获取当前流程实例
+     * @param processId
+     * @return
+     */
+    ProcessInstance currentProcess(String processId);
 }
