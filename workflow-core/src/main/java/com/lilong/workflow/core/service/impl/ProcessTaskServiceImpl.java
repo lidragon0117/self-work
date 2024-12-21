@@ -1,17 +1,21 @@
 package com.lilong.workflow.core.service.impl;
 
 
+import cn.hutool.core.collection.CollUtil;
 import com.lilong.workflow.core.commons.request.ProcessTaskRequest;
+import com.lilong.workflow.core.commons.response.CurrentTaskVO;
 import com.lilong.workflow.core.commons.response.base.BaseException;
 import com.lilong.workflow.core.service.base.AbstractTaskService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author : lilong
@@ -57,7 +61,7 @@ public class ProcessTaskServiceImpl extends AbstractTaskService {
             return taskService.createTaskQuery()
                     .processDefinitionKey(processTask.getProcessKey())
                     .includeProcessVariables()
-                    .taskAssignee(processTask.getCurrentUser())
+                    .taskCandidateUser(processTask.getCurrentUser())
                     .singleResult();
         }
         return this.getCurrentTask(processTask.getProcessId(), processTask.getCurrentUser());
@@ -66,17 +70,26 @@ public class ProcessTaskServiceImpl extends AbstractTaskService {
     /**
      * 获取所有流程任务
      *
-     * @param processId
-     * @param assignee
+     * @param processTaskRequest
      * @return
      */
     @Override
-    public List<Task> getProcessTaskList(String processId, String assignee) {
-        return taskService.createTaskQuery()
-                .taskAssignee(assignee)
-                .processInstanceId(processId)
-                .desc().
-                list();
+    public List<CurrentTaskVO> getProcessTaskList(ProcessTaskRequest processTaskRequest) {
+        List<Task> list = taskService.createTaskQuery()
+                .taskCandidateUser(processTaskRequest.getCurrentUser())
+                .processInstanceId(processTaskRequest.getProcessId())
+                .list();
+        if (CollUtil.isEmpty(list)) {
+            return Lists.emptyList();
+        }
+        return list.stream().map(x-> CurrentTaskVO.builder()
+                 .name(x.getName())
+                 .assignee(x.getAssignee())
+                 .description(x.getDescription())
+                 .processId(x.getProcessInstanceId())
+                 .processVariables(x.getProcessVariables())
+                 .taskVariables(x.getTaskLocalVariables())
+                 .build()).collect(Collectors.toList());
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.lilong.workflow.core.service;
 
 import com.lilong.workflow.core.commons.request.ProcessTaskRequest;
+import com.lilong.workflow.core.commons.response.CurrentTaskVO;
 import org.activiti.engine.task.Task;
 
 import java.util.List;
@@ -29,11 +30,10 @@ public interface ProcessTaskService {
 
     /**
      * 获取所有流程
-     * @param processId
-     * @param assignee
+     * @param processTaskRequest
      * @return
      */
-    List<Task> getProcessTaskList(String processId, String assignee);
+    List<CurrentTaskVO> getProcessTaskList(ProcessTaskRequest processTaskRequest);
 
     /**
      * 操作审批当前节点
