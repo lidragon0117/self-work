@@ -29,11 +29,11 @@ public interface ProcessTaskService {
     Task getCurrentTask(ProcessTaskRequest processTask);
 
     /**
-     * 获取所有流程
+     * 获取所有流程(用户组)
      * @param processTaskRequest
      * @return
      */
-    List<CurrentTaskVO> getProcessTaskList(ProcessTaskRequest processTaskRequest);
+    List<CurrentTaskVO> getProcessTaskGroupList(ProcessTaskRequest processTaskRequest);
 
     /**
      * 操作审批当前节点
@@ -42,4 +42,25 @@ public interface ProcessTaskService {
      * @return
      */
     Boolean completeTask(String taskId, Map<String,Object> varLogs);
+
+    /**
+     * 拾取任务
+     * @param processTaskRequest
+     * @return
+     */
+    Boolean claimTask(ProcessTaskRequest processTaskRequest);
+
+    /**
+     *  归还任务/转办任务
+     * @param processTaskRequest
+     * @return
+     */
+    Boolean updateAssigneeTask(ProcessTaskRequest processTaskRequest);
+
+    /**
+     * 获取当前用户的所有待审批任务
+     * @param processTaskRequest
+     * @return
+     */
+    List<CurrentTaskVO> currentTaskList(ProcessTaskRequest processTaskRequest);
 }

@@ -36,22 +36,54 @@ public class ProcessTaskController {
         }
         CurrentTaskVO build = CurrentTaskVO.builder()
                 .priority(currentTask.getPriority())
+                .processId(currentTask.getProcessInstanceId())
                 .assignee(currentTask.getAssignee())
                 .isSuspended(currentTask.isSuspended())
                 .description(currentTask.getDescription())
                 .name(currentTask.getName())
+                .taskId(currentTask.getId())
                 .build();
         return BaseResponse.success(build);
     }
 
     /**
-     * 获取当前用户流程下所有任务
+     * 获取当前用户流程下所有任务(用户组)
      * @param processTaskRequest
      * @return all Task
      */
-    @PostMapping("/belongToCurrentUser")
+    @PostMapping("/groupBelongToCurrentUser")
     public BaseResponse<List<CurrentTaskVO>> belongsToCurrentUser(@RequestBody ProcessTaskRequest processTaskRequest) {
-        return BaseResponse.success(processTaskService.getProcessTaskList(processTaskRequest));
+        return BaseResponse.success(processTaskService.getProcessTaskGroupList(processTaskRequest));
+    }
+
+    /**
+     * 拾取任务
+     * @param processTaskRequest
+     * @return all Task
+     */
+    @PostMapping("/claimTask")
+    public BaseResponse<Boolean> claimTask(@RequestBody ProcessTaskRequest processTaskRequest) {
+        return BaseResponse.success(processTaskService.claimTask(processTaskRequest));
+    }
+
+    /**
+     * 获取当前用户需要执行的任务(不含任务组)
+     * @param processTaskRequest
+     * @return
+     */
+    @PostMapping("/currentTaskList")
+    public BaseResponse<List<CurrentTaskVO>> currentTaskList(@RequestBody ProcessTaskRequest processTaskRequest) {
+        return BaseResponse.success(processTaskService.currentTaskList(processTaskRequest));
+    }
+
+    /**
+     * 更新任务处理人
+     * @param processTaskRequest
+     * @return
+     */
+    @PostMapping("/operateAssigneeTask")
+    public BaseResponse<Boolean> operateAssigneeTask(@RequestBody ProcessTaskRequest processTaskRequest){
+        return BaseResponse.success(processTaskService.updateAssigneeTask(processTaskRequest));
     }
 
 }

@@ -61,20 +61,20 @@ public class ProcessTaskServiceImpl extends AbstractTaskService {
             return taskService.createTaskQuery()
                     .processDefinitionKey(processTask.getProcessKey())
                     .includeProcessVariables()
-                    .taskCandidateUser(processTask.getCurrentUser())
+                    .taskAssignee(processTask.getCurrentUser())
                     .singleResult();
         }
         return this.getCurrentTask(processTask.getProcessId(), processTask.getCurrentUser());
     }
 
     /**
-     * 获取所有流程任务
+     * 获取所有流程任务(用户组)
      *
      * @param processTaskRequest
      * @return
      */
     @Override
-    public List<CurrentTaskVO> getProcessTaskList(ProcessTaskRequest processTaskRequest) {
+    public List<CurrentTaskVO> getProcessTaskGroupList(ProcessTaskRequest processTaskRequest) {
         List<Task> list = taskService.createTaskQuery()
                 .taskCandidateUser(processTaskRequest.getCurrentUser())
                 .processInstanceId(processTaskRequest.getProcessId())
@@ -82,14 +82,15 @@ public class ProcessTaskServiceImpl extends AbstractTaskService {
         if (CollUtil.isEmpty(list)) {
             return Lists.emptyList();
         }
-        return list.stream().map(x-> CurrentTaskVO.builder()
-                 .name(x.getName())
-                 .assignee(x.getAssignee())
-                 .description(x.getDescription())
-                 .processId(x.getProcessInstanceId())
-                 .processVariables(x.getProcessVariables())
-                 .taskVariables(x.getTaskLocalVariables())
-                 .build()).collect(Collectors.toList());
+        return list.stream().map(x -> CurrentTaskVO.builder()
+                .name(x.getName())
+                .taskId(x.getId())
+                .assignee(x.getAssignee())
+                .description(x.getDescription())
+                .processId(x.getProcessInstanceId())
+                .processVariables(x.getProcessVariables())
+                .taskVariables(x.getTaskLocalVariables())
+                .build()).collect(Collectors.toList());
     }
 
     /**
@@ -103,5 +104,25 @@ public class ProcessTaskServiceImpl extends AbstractTaskService {
     public Boolean completeTask(String taskId, Map<String, Object> varLogs) {
         taskService.complete(taskId, varLogs);
         return true;
+    }
+
+    /**
+     * 拾取任务
+     * @param processTaskRequest
+     * @return
+     */
+    @Override
+    public Boolean claimTask(ProcessTaskRequest processTaskRequest) {
+        return super.claimTask(processTaskRequest);
+    }
+
+    /**
+     * 更新任务处理人/ 转办/交接/归还
+     * @param processTaskRequest
+     * @return
+     */
+    @Override
+    public Boolean updateAssigneeTask(ProcessTaskRequest processTaskRequest) {
+        return super.updateAssigneeTask(processTaskRequest);
     }
 }
