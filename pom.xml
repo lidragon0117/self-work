@@ -16,6 +16,7 @@
         <module>workflow-core</module>
         <module>adapter</module>
         <module>cache-core</module>
+        <module>generate-core</module>
     </modules>
     <dependencies>
 

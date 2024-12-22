@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: generate-core
+# ???
+server:
+  port: 8098
