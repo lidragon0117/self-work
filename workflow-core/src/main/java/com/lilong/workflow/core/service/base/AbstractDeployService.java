@@ -41,7 +41,7 @@ public abstract class AbstractDeployService implements DeploymentService {
                     .addInputStream(deployVo.getResourceName(),inputStream)
                     .deploy();
         } catch (FileNotFoundException e) {
-            log.error("File not found{}",e);
+            log.error("File not found:{}",e);
         }
         return null;
     }

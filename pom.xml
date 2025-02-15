@@ -17,6 +17,7 @@
         <module>adapter</module>
         <module>cache-core</module>
         <module>generate-core</module>
+        <module>massage-core</module>
     </modules>
     <dependencies>
 
