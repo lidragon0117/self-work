@@ -1,0 +1,16 @@
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: null
+  timeout: 30000
+  maxTotal: 30
+  maxIdle: 10
+  numTestsPerEvictionRun: 1024
+  timeBetweenEvictionRunsMillis: 30000
+  minEvictableIdleTimeMillis: 1800000
+  softMinEvictableIdleTimeMillis: 10000
+  maxWaitMillis: 1500
+  testOnBorrow: true
+  testWhileIdle: true
+  blockWhenExhausted: false
+  JmxEnabled: true
